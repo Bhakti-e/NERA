@@ -51,7 +51,7 @@ export default function AboutPage() {
                 boxShadow: "0 4px 24px rgba(0,0,0,0.2)",
               }}
             >
-              <NERALogo variant="full" size={48} href="/" />
+              <NERALogo height={48} href="/" />
             </div>
           </div>
 

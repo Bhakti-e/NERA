@@ -1,207 +1,228 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────
+   NERA Design Tokens
+   Primary canvas: white / light
+   Accent: blue → purple gradient
+   Immersive (PCB Lab, Robotics, hero tails): dark navy
+───────────────────────────────────────────────────── */
 :root {
-  /* ── Surfaces: 60-70% white/light, 20-30% blue-purple, small dark ── */
-  --nera-surface-page:      #f8f8fc;   /* Primary — very light blue-white */
-  --nera-surface-card:      #ffffff;
-  --nera-surface-raised:    #f0f0f8;
-  --nera-surface-tint:      #eef0fb;   /* Light blue-purple tint — transition sections */
-  --nera-surface-tint-alt:  #e8eaf8;   /* Slightly deeper tint */
-  --nera-surface-navy:      #0f1729;   /* Dark navy — immersive sections only */
-  --nera-surface-navy-alt:  #131d35;
-  --nera-surface-deep:      #0a0f1e;   /* Deepest — footer */
+  /* Surfaces */
+  --s-page:      #f5f6fa;
+  --s-card:      #ffffff;
+  --s-tint:      #eef0f9;
+  --s-navy:      #0e1628;
+  --s-navy-alt:  #121e35;
+  --s-deep:      #090e1a;
 
-  /* ── Brand colours ─────────────────────────────────── */
-  --nera-blue:        #2563eb;   /* Primary blue */
-  --nera-blue-deep:   #1d4ed8;
-  --nera-purple:      #7c3aed;   /* Secondary purple */
-  --nera-purple-mid:  #6d28d9;
-  --nera-indigo:      #4f46e5;   /* Indigo bridge between blue & purple */
-  --nera-cyan:        #0891b2;   /* Accent cyan — PCB / electronics */
-  --nera-cyan-bright: #06b6d4;
-  --nera-teal:        #0d9488;
+  /* Brand */
+  --c-blue:      #2563eb;
+  --c-blue-dk:   #1d4ed8;
+  --c-purple:    #7c3aed;
+  --c-purple-dk: #6d28d9;
+  --c-indigo:    #4f46e5;
+  --c-cyan:      #0891b2;
+  --c-cyan-br:   #06b6d4;
+  --c-amber:     #d97706;
+  --c-green:     #059669;
+  --c-rose:      #e11d48;
 
-  /* ── CTA gradient ──────────────────────────────────── */
-  --nera-cta-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  --nera-cta-gradient-hover: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
+  /* Text */
+  --t-primary:     #0d1117;
+  --t-secondary:   #374151;
+  --t-muted:       #6b7280;
+  --t-dark:        #e2e8f0;
+  --t-dark-muted:  #64748b;
 
-  /* ── Legacy accent aliases (keep for compat) ─────── */
-  --nera-accent-primary:    #4f46e5;
-  --nera-accent-cyan:       #0891b2;
-  --nera-accent-cyan-bright:#06b6d4;
-  --nera-accent-violet:     #7c3aed;
-  --nera-accent-green:      #059669;
-  --nera-accent-amber:      #d97706;
-  --nera-accent-rose:       #e11d48;
+  /* Fonts */
+  --f-display: "Space Grotesk", system-ui, sans-serif;
+  --f-body:    "Inter", system-ui, sans-serif;
+  --f-mono:    "JetBrains Mono", monospace;
 
-  /* ── Text ──────────────────────────────────────────── */
-  --nera-text-primary:        #0d1117;   /* Dark navy — almost black */
-  --nera-text-secondary:      #374151;
-  --nera-text-muted:          #6b7280;
-  --nera-text-on-dark:        #e8eaf0;
-  --nera-text-on-dark-muted:  #6b7a99;
+  /* Shadows */
+  --sh-card:   0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --sh-raised: 0 4px 16px rgba(0,0,0,0.08), 0 16px 48px rgba(0,0,0,0.06);
+  --sh-blue:   0 4px 24px rgba(37,99,235,0.22);
 
-  /* ── Fonts ─────────────────────────────────────────── */
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-body:    "Inter", system-ui, sans-serif;
-  --font-mono:    "JetBrains Mono", "Fira Code", monospace;
+  /* CTA gradient */
+  --g-cta:       linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --g-cta-hover: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
 
-  /* ── Shadows ───────────────────────────────────────── */
-  --shadow-card:    0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04);
-  --shadow-lifted:  0 4px 16px rgba(0,0,0,0.08), 0 16px 48px rgba(0,0,0,0.06);
-  --shadow-blue:    0 8px 32px rgba(37,99,235,0.2);
-  --shadow-indigo:  0 8px 32px rgba(79,70,229,0.2);
-  --shadow-navy:    0 4px 24px rgba(13,23,48,0.15);
-
-  /* ── Radii ─────────────────────────────────────────── */
-  --radius-sm:  6px;
-  --radius-md:  12px;
-  --radius-lg:  20px;
-  --radius-xl:  28px;
+  /* Radius */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 24px;
 }
 
-/* ── Reset ──────────────────────────────────────────── */
-*, *::before, *::after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
+/* ── Base reset ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; padding: 0; margin: 0; }
+html { scroll-behavior: smooth; }
 body {
-  background-color: var(--nera-surface-page);
-  color: var(--nera-text-primary);
-  font-family: var(--font-body);
+  background: var(--s-page);
+  color: var(--t-primary);
+  font-family: var(--f-body);
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Scrollbar ──────────────────────────────────────── */
-::-webkit-scrollbar        { width: 5px; }
-::-webkit-scrollbar-track  { background: var(--nera-surface-deep); }
-::-webkit-scrollbar-thumb  { background: rgba(79,70,229,0.5); border-radius: 3px; }
+/* ── Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--s-deep); }
+::-webkit-scrollbar-thumb { background: rgba(79,70,229,0.5); border-radius: 3px; }
 
-/* ── Selection ──────────────────────────────────────── */
-::selection {
-  background: rgba(79,70,229,0.15);
-  color: var(--nera-text-primary);
-}
+/* ── Selection ───────────────────────────────────── */
+::selection { background: rgba(79,70,229,0.14); }
 
-/* ── Focus ──────────────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--nera-blue);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
+/* ── Focus ───────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--c-blue); outline-offset: 3px; border-radius: 4px; }
 
-/* ── CTA button gradient ────────────────────────────── */
-.nera-btn-primary {
-  background: var(--nera-cta-gradient);
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.875rem;
-  padding: 0.625rem 1.5rem;
-  border-radius: var(--radius-md);
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-blue);
+/* ════════════════════════════════════════════════════
+   BUTTON SYSTEM
+   Always clear, always big enough to click, always
+   communicates its purpose without ambiguity.
+════════════════════════════════════════════════════ */
+
+/* Primary — blue→purple gradient */
+.btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 28px;
+  font-family: var(--f-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--g-cta);
+  border: none;
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-blue);
+  cursor: pointer;
   text-decoration: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  user-select: none;
 }
-.nera-btn-primary:hover {
-  background: var(--nera-cta-gradient-hover);
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 12px 40px rgba(37,99,235,0.3);
+.btn-primary:hover {
+  background: var(--g-cta-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.3);
+}
+.btn-primary:active { transform: translateY(0); }
+
+/* Secondary — white bg, visible border */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 28px;
+  font-family: var(--f-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--t-primary);
+  background: #ffffff;
+  border: 1.5px solid rgba(79,70,229,0.3);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+.btn-secondary:hover {
+  border-color: var(--c-blue);
+  color: var(--c-blue);
+  background: rgba(37,99,235,0.04);
+  transform: translateY(-1px);
 }
 
-/* ── Engineering grid patterns ──────────────────────── */
-.nera-grid-bg {
-  background-image:
-    linear-gradient(rgba(79,70,229,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79,70,229,0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
+/* Ghost — for dark backgrounds */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 28px;
+  font-family: var(--f-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--t-dark);
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
 }
-.nera-grid-bg-light {
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.32);
+  transform: translateY(-1px);
+}
+
+/* Small variants */
+.btn-primary-sm {
+  min-height: 36px;
+  padding: 0 18px;
+  font-size: 0.8rem;
+}
+.btn-secondary-sm {
+  min-height: 36px;
+  padding: 0 18px;
+  font-size: 0.8rem;
+}
+
+/* ── Grid/circuit backgrounds ────────────────────── */
+.bg-grid-light {
   background-image:
     linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-size: 48px 48px;
 }
-.nera-grid-bg-cyan {
+.bg-grid-navy {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.bg-grid-cyan {
   background-image:
     linear-gradient(rgba(8,145,178,0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(8,145,178,0.07) 1px, transparent 1px);
   background-size: 32px 32px;
 }
-.nera-grid-bg-navy {
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
 
-/* ── Gradient section dividers ──────────────────────── */
-.nera-divider-to-tint {
-  background: linear-gradient(180deg, #ffffff 0%, var(--nera-surface-tint) 100%);
-}
-.nera-divider-to-white {
-  background: linear-gradient(180deg, var(--nera-surface-tint) 0%, #ffffff 100%);
-}
-.nera-divider-to-navy {
-  background: linear-gradient(180deg, var(--nera-surface-tint) 0%, var(--nera-surface-navy) 100%);
-}
-
-/* ── Animated signal lines ──────────────────────────── */
-@keyframes signal-travel {
-  0%   { stroke-dashoffset: 200; opacity: 0; }
-  10%  { opacity: 0.8; }
-  90%  { opacity: 0.8; }
+/* ── Signal animation ────────────────────────────── */
+@keyframes signal {
+  0%   { stroke-dashoffset: 300; opacity: 0; }
+  8%   { opacity: 0.7; }
+  92%  { opacity: 0.7; }
   100% { stroke-dashoffset: 0; opacity: 0; }
 }
-.signal-path {
-  stroke-dasharray: 200;
-  stroke-dashoffset: 200;
-  animation: signal-travel 2.4s ease-in-out infinite;
-}
-.signal-path-delay-1 { animation-delay: 0.5s; }
-.signal-path-delay-2 { animation-delay: 1.0s; }
-.signal-path-delay-3 { animation-delay: 1.5s; }
+.sig { stroke-dasharray: 300; stroke-dashoffset: 300; animation: signal 2.6s ease-in-out infinite; }
+.sig-d1 { animation-delay: 0.5s; }
+.sig-d2 { animation-delay: 1.0s; }
 
-/* ── Float animation ────────────────────────────────── */
-@keyframes probe-float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-7px); }
-}
-.nera-probe-float { animation: probe-float 4s ease-in-out infinite; }
+/* ── Float ───────────────────────────────────────── */
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.float { animation: float 4s ease-in-out infinite; }
 
-/* ── Pulse ring ──────────────────────────────────────── */
+/* ── Pulse ───────────────────────────────────────── */
 @keyframes pulse-ring {
-  0%   { transform: scale(0.95); opacity: 0.5; }
-  70%  { transform: scale(1.25); opacity: 0; }
-  100% { transform: scale(1.25); opacity: 0; }
+  0%   { transform: scale(1); opacity: 0.5; }
+  70%  { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(1.3); opacity: 0; }
 }
 .pulse-ring { animation: pulse-ring 2.2s ease-out infinite; }
 
-/* ── Glow pulse ─────────────────────────────────────── */
-@keyframes glow-pulse {
-  0%, 100% { opacity: 0.4; }
-  50%       { opacity: 0.8; }
-}
-.glow-pulse { animation: glow-pulse 2.5s ease-in-out infinite; }
-
-/* ── Reduce motion ──────────────────────────────────── */
+/* ── Reduce motion ───────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
 }
