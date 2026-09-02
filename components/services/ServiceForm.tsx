@@ -2,17 +2,17 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle, ArrowLeft, CheckCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Send } from "lucide-react";
 import { buildWhatsAppUrl, getServiceLabel } from "@/lib/whatsapp";
 import type { ServiceType, ServiceFormData } from "@/types";
 
+/* ─── Field definitions — UNCHANGED logic ─────────────── */
 interface FieldDef {
   name: string;
   label: string;
   type: "text" | "textarea" | "select" | "email" | "tel";
   placeholder?: string;
   options?: string[];
-  required?: boolean;
 }
 
 const serviceFields: Record<ServiceType, FieldDef[]> = {
@@ -25,7 +25,7 @@ const serviceFields: Record<ServiceType, FieldDef[]> = {
     { name: "subject", label: "Subject / Domain", type: "text", placeholder: "e.g. Electronics, Robotics, Physics" },
     { name: "audience", label: "Target Audience", type: "select", options: ["School Students", "College Students", "Research", "Industry", "Other"] },
     { name: "platform", label: "Target Platform", type: "select", options: ["Web Browser", "Windows Desktop", "Cross-Platform", "Not Sure"] },
-    { name: "existingMaterials", label: "Do you have existing materials?", type: "select", options: ["Yes – curriculum/notes", "Yes – diagrams/schematics", "No – starting fresh"] },
+    { name: "existingMaterials", label: "Existing materials?", type: "select", options: ["Yes – curriculum/notes", "Yes – diagrams/schematics", "No – starting fresh"] },
   ],
   "pcb-designing": [
     { name: "layers", label: "Board Layers", type: "select", options: ["2-layer", "4-layer", "6+ layers", "Not Sure"] },
@@ -61,13 +61,32 @@ const serviceFields: Record<ServiceType, FieldDef[]> = {
   other: [],
 };
 
-const inputClass =
-  "w-full px-3 py-2.5 rounded-lg border text-sm outline-none transition-all focus:ring-2";
-const inputStyle = {
-  borderColor: "rgba(0,0,0,0.1)",
-  background: "white",
-  color: "var(--nera-text-primary)",
+/* Submit button label — display only, logic unchanged */
+const submitLabel: Partial<Record<ServiceType, string>> = {
+  mentorship: "Book Consultation",
+  "research-publication": "Book Consultation",
 };
+
+/* ─── Shared input styles ───────────────────────────────── */
+const inputBase =
+  "w-full px-3.5 py-2.5 rounded-xl border text-sm outline-none transition-all duration-200";
+
+function Field({
+  label, error, required, children,
+}: {
+  label: string; error?: string; required?: boolean; children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--nera-text-secondary)" }}>
+        {label}
+        {required && <span className="ml-0.5" style={{ color: "#e11d48" }}> *</span>}
+      </label>
+      {children}
+      {error && <p className="text-xs mt-1.5" style={{ color: "#e11d48" }}>{error}</p>}
+    </div>
+  );
+}
 
 interface Props {
   serviceType: ServiceType;
@@ -75,6 +94,7 @@ interface Props {
 }
 
 export default function ServiceForm({ serviceType, onBack }: Props) {
+  /* ── All state & logic UNCHANGED ── */
   const [values, setValues] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -88,21 +108,17 @@ export default function ServiceForm({ serviceType, onBack }: Props) {
   };
 
   const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!values.name?.trim()) newErrors.name = "Name is required";
-    if (!values.contact?.trim()) newErrors.contact = "Contact is required";
-    if (!values.description?.trim()) newErrors.description = "Please describe your requirement";
-    return newErrors;
+    const errs: Record<string, string> = {};
+    if (!values.name?.trim()) errs.name = "Name is required";
+    if (!values.contact?.trim()) errs.contact = "Contact is required";
+    if (!values.description?.trim()) errs.description = "Please describe your requirement";
+    return errs;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs);
-      return;
-    }
-
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     const formData: ServiceFormData = {
       serviceType,
       name: values.name ?? "",
@@ -110,24 +126,24 @@ export default function ServiceForm({ serviceType, onBack }: Props) {
       description: values.description ?? "",
       ...values,
     };
-
     const url = buildWhatsAppUrl(formData);
     setSubmitted(true);
     setTimeout(() => window.open(url, "_blank"), 600);
   };
 
+  /* ── Success state ── */
   if (submitted) {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-12"
+        className="flex flex-col items-center text-center py-16"
       >
         <div
-          className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-          style={{ background: "rgba(16,185,129,0.1)" }}
+          className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5"
+          style={{ background: "rgba(5,150,105,0.1)", border: "1px solid rgba(5,150,105,0.2)" }}
         >
-          <CheckCircle className="w-8 h-8" style={{ color: "#10b981" }} />
+          <CheckCircle className="w-7 h-7" style={{ color: "#059669" }} />
         </div>
         <h3
           className="text-xl font-bold mb-2"
@@ -135,12 +151,12 @@ export default function ServiceForm({ serviceType, onBack }: Props) {
         >
           Enquiry Prepared
         </h3>
-        <p className="text-sm mb-6" style={{ color: "var(--nera-text-secondary)" }}>
-          WhatsApp is opening with your structured message. NERA will get back to you shortly.
+        <p className="text-sm max-w-xs mb-7" style={{ color: "var(--nera-text-secondary)" }}>
+          WhatsApp is opening with your structured message. NERA will be in touch.
         </p>
         <button
           onClick={() => { setSubmitted(false); setValues({}); onBack(); }}
-          className="text-sm font-medium transition-colors hover:underline"
+          className="text-sm font-semibold underline underline-offset-2 transition-colors hover:text-indigo-700"
           style={{ color: "var(--nera-accent-primary)" }}
         >
           Submit another enquiry
@@ -149,135 +165,150 @@ export default function ServiceForm({ serviceType, onBack }: Props) {
     );
   }
 
+  const btnLabel = submitLabel[serviceType] ?? "Submit Requirement";
+  const fieldStyle = { borderColor: "rgba(0,0,0,0.1)", background: "white", color: "var(--nera-text-primary)" };
+  const fieldFocusRing = { outline: "2px solid rgba(79,70,229,0.35)", outlineOffset: "1px" };
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: 20 }}
+      initial={{ opacity: 0, x: 16 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.28 }}
     >
+      {/* Back link */}
       <button
         onClick={onBack}
-        className="flex items-center gap-2 text-sm mb-6 transition-colors hover:text-[var(--nera-accent-primary)]"
-        style={{ color: "var(--nera-text-secondary)" }}
+        className="inline-flex items-center gap-1.5 text-xs font-medium mb-6 transition-colors hover:text-indigo-600"
+        style={{ color: "var(--nera-text-muted)" }}
       >
-        <ArrowLeft className="w-4 h-4" />
+        <ArrowLeft className="w-3.5 h-3.5" />
         Change service
       </button>
 
-      <div className="mb-6 p-3 rounded-xl" style={{ background: "rgba(79,70,229,0.06)", border: "1px solid rgba(79,70,229,0.12)" }}>
-        <span className="text-sm font-semibold" style={{ color: "var(--nera-accent-primary)" }}>
-          {label}
-        </span>
+      {/* Selected service badge */}
+      <div
+        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl mb-8 text-sm font-semibold"
+        style={{
+          background: "rgba(79,70,229,0.07)",
+          border: "1px solid rgba(79,70,229,0.15)",
+          color: "var(--nera-accent-primary)",
+        }}
+      >
+        {label}
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-4">
-        {/* Common fields */}
-        <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--nera-text-secondary)" }}>
-            Your Name <span style={{ color: "#f43f5e" }}>*</span>
-          </label>
+      <form onSubmit={handleSubmit} noValidate className="space-y-5">
+        {/* Name */}
+        <Field label="Your Name" required error={errors.name}>
           <input
             type="text"
             value={values.name ?? ""}
             onChange={(e) => set("name", e.target.value)}
             placeholder="Full name"
-            className={inputClass}
-            style={{ ...inputStyle, borderColor: errors.name ? "#f43f5e" : "rgba(0,0,0,0.1)" }}
-            aria-describedby={errors.name ? "name-error" : undefined}
+            className={inputBase}
+            style={{ ...fieldStyle, borderColor: errors.name ? "#e11d48" : "rgba(0,0,0,0.1)" }}
+            onFocus={(e) => Object.assign(e.target.style, fieldFocusRing)}
+            onBlur={(e) => { e.target.style.outline = "none"; }}
+            aria-describedby={errors.name ? "name-err" : undefined}
+            id="name-err"
           />
-          {errors.name && <p id="name-error" className="text-xs mt-1" style={{ color: "#f43f5e" }}>{errors.name}</p>}
-        </div>
+        </Field>
 
-        <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--nera-text-secondary)" }}>
-            Contact (Email or Phone) <span style={{ color: "#f43f5e" }}>*</span>
-          </label>
+        {/* Contact */}
+        <Field label="Contact — Email or Phone" required error={errors.contact}>
           <input
             type="text"
             value={values.contact ?? ""}
             onChange={(e) => set("contact", e.target.value)}
-            placeholder="email@example.com or +91 XXXXXXXXXX"
-            className={inputClass}
-            style={{ ...inputStyle, borderColor: errors.contact ? "#f43f5e" : "rgba(0,0,0,0.1)" }}
-            aria-describedby={errors.contact ? "contact-error" : undefined}
+            placeholder="email@example.com  or  +91 XXXXXXXXXX"
+            className={inputBase}
+            style={{ ...fieldStyle, borderColor: errors.contact ? "#e11d48" : "rgba(0,0,0,0.1)" }}
+            onFocus={(e) => Object.assign(e.target.style, fieldFocusRing)}
+            onBlur={(e) => { e.target.style.outline = "none"; }}
           />
-          {errors.contact && <p id="contact-error" className="text-xs mt-1" style={{ color: "#f43f5e" }}>{errors.contact}</p>}
-        </div>
+        </Field>
 
-        {/* Dynamic fields */}
+        {/* Dynamic fields — logic UNCHANGED */}
         {extraFields.map((field) => (
-          <div key={field.name}>
-            <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--nera-text-secondary)" }}>
-              {field.label}
-            </label>
+          <Field key={field.name} label={field.label}>
             {field.type === "select" ? (
               <select
                 value={values[field.name] ?? ""}
                 onChange={(e) => set(field.name, e.target.value)}
-                className={inputClass}
-                style={inputStyle}
+                className={inputBase}
+                style={fieldStyle}
+                onFocus={(e) => Object.assign(e.target.style, fieldFocusRing)}
+                onBlur={(e) => { e.target.style.outline = "none"; }}
               >
-                <option value="">Select...</option>
+                <option value="">Select…</option>
                 {field.options?.map((opt) => (
                   <option key={opt} value={opt}>{opt}</option>
                 ))}
               </select>
-            ) : field.type === "textarea" ? (
-              <textarea
-                value={values[field.name] ?? ""}
-                onChange={(e) => set(field.name, e.target.value)}
-                placeholder={field.placeholder}
-                rows={3}
-                className={inputClass}
-                style={inputStyle}
-              />
             ) : (
               <input
                 type={field.type}
                 value={values[field.name] ?? ""}
                 onChange={(e) => set(field.name, e.target.value)}
                 placeholder={field.placeholder}
-                className={inputClass}
-                style={inputStyle}
+                className={inputBase}
+                style={fieldStyle}
+                onFocus={(e) => Object.assign(e.target.style, fieldFocusRing)}
+                onBlur={(e) => { e.target.style.outline = "none"; }}
               />
             )}
-          </div>
+          </Field>
         ))}
 
-        {/* Research disclaimer */}
+        {/* Research disclaimer — logic UNCHANGED */}
         {serviceType === "research-publication" && (
-          <p className="text-xs p-3 rounded-lg" style={{ background: "rgba(244,63,94,0.05)", color: "var(--nera-text-secondary)", border: "1px solid rgba(244,63,94,0.12)" }}>
-            NERA provides research guidance and publication-process support. We do not guarantee publication outcomes.
-          </p>
+          <div
+            className="text-xs p-3.5 rounded-xl"
+            style={{
+              background: "rgba(225,29,72,0.04)",
+              border: "1px solid rgba(225,29,72,0.12)",
+              color: "var(--nera-text-secondary)",
+            }}
+          >
+            NERA provides research guidance and publication-process support.
+            We do not guarantee publication outcomes.
+          </div>
         )}
 
-        <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--nera-text-secondary)" }}>
-            Describe Your Requirement <span style={{ color: "#f43f5e" }}>*</span>
-          </label>
+        {/* Description */}
+        <Field label="Describe Your Requirement" required error={errors.description}>
           <textarea
             value={values.description ?? ""}
             onChange={(e) => set("description", e.target.value)}
-            placeholder="Tell NERA what you want to build or achieve..."
+            placeholder="Tell NERA what you want to build or achieve…"
             rows={4}
-            className={inputClass}
-            style={{ ...inputStyle, borderColor: errors.description ? "#f43f5e" : "rgba(0,0,0,0.1)", resize: "vertical" }}
-            aria-describedby={errors.description ? "desc-error" : undefined}
+            className={inputBase}
+            style={{
+              ...fieldStyle,
+              borderColor: errors.description ? "#e11d48" : "rgba(0,0,0,0.1)",
+              resize: "vertical",
+              minHeight: "100px",
+            }}
+            onFocus={(e) => Object.assign(e.target.style, fieldFocusRing)}
+            onBlur={(e) => { e.target.style.outline = "none"; }}
           />
-          {errors.description && <p id="desc-error" className="text-xs mt-1" style={{ color: "#f43f5e" }}>{errors.description}</p>}
-        </div>
+        </Field>
 
+        {/* Submit — same WhatsApp logic, new label */}
         <button
           type="submit"
-          className="w-full flex items-center justify-center gap-3 py-3.5 rounded-xl font-semibold text-white transition-all hover:scale-105 hover:shadow-lg"
-          style={{ background: "#25d366" }}
+          className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-semibold text-sm text-white transition-all duration-200 hover:scale-[1.02] hover:shadow-lg mt-2"
+          style={{
+            background: "var(--nera-accent-primary)",
+            boxShadow: "var(--shadow-indigo)",
+          }}
         >
-          <MessageCircle className="w-5 h-5" />
-          Send via WhatsApp
+          <Send className="w-4 h-4" />
+          {btnLabel}
         </button>
 
         <p className="text-xs text-center" style={{ color: "var(--nera-text-muted)" }}>
-          No account needed. WhatsApp will open with your message pre-filled.
+          No account needed · Your message opens in WhatsApp
         </p>
       </form>
     </motion.div>

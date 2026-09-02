@@ -1,33 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  /* Surfaces */
-  --nera-surface-page: #f7f6f3;
-  --nera-surface-card: #ffffff;
-  --nera-surface-mid: #1a1a26;
-  --nera-surface-deep: #0d0d16;
+  /* ── Surfaces ──────────────────────────────────────── */
+  --nera-surface-page:    #f4f3f0;
+  --nera-surface-card:    #ffffff;
+  --nera-surface-raised:  #eeecea;
+  --nera-surface-mid:     #16161f;
+  --nera-surface-mid-alt: #1c1c28;
+  --nera-surface-deep:    #0c0c13;
 
-  /* Accents */
-  --nera-accent-primary: #4f46e5;
-  --nera-accent-cyan: #06b6d4;
-  --nera-accent-violet: #7c3aed;
-  --nera-accent-green: #10b981;
-  --nera-accent-amber: #f59e0b;
+  /* ── Brand accents ─────────────────────────────────── */
+  --nera-accent-primary:  #4f46e5;   /* indigo  — primary CTA, software */
+  --nera-accent-cyan:     #0891b2;   /* teal    — PCB / electronics */
+  --nera-accent-cyan-bright: #06b6d4;
+  --nera-accent-violet:   #7c3aed;   /* violet  — simulators */
+  --nera-accent-green:    #059669;   /* green   — research / active */
+  --nera-accent-amber:    #d97706;   /* amber   — robotics */
+  --nera-accent-rose:     #e11d48;   /* rose    — alerts */
 
-  /* Text */
-  --nera-text-primary: #111118;
-  --nera-text-secondary: #555566;
-  --nera-text-muted: #9999aa;
-  --nera-text-on-dark: #f0f0f8;
-  --nera-text-on-dark-muted: #9999b0;
+  /* ── Text ──────────────────────────────────────────── */
+  --nera-text-primary:        #0f0f14;
+  --nera-text-secondary:      #4a4a5a;
+  --nera-text-muted:          #8888a0;
+  --nera-text-on-dark:        #ededf5;
+  --nera-text-on-dark-muted:  #7a7a90;
 
-  /* Fonts */
+  /* ── Fonts ─────────────────────────────────────────── */
   --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-body:    "Inter", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", "Fira Code", monospace;
+
+  /* ── Shadows ───────────────────────────────────────── */
+  --shadow-card:    0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-lifted:  0 4px 12px rgba(0,0,0,0.08), 0 16px 40px rgba(0,0,0,0.06);
+  --shadow-indigo:  0 8px 32px rgba(79,70,229,0.2);
+
+  /* ── Radii ─────────────────────────────────────────── */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  28px;
 }
 
-* {
+/* ── Reset ──────────────────────────────────────────── */
+*, *::before, *::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -35,37 +51,104 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background-color: var(--nera-surface-page);
   color: var(--nera-text-primary);
   font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--nera-surface-deep);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--nera-accent-primary);
-  border-radius: 3px;
-}
+/* ── Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: var(--nera-surface-deep); }
+::-webkit-scrollbar-thumb  { background: rgba(79,70,229,0.5); border-radius: 3px; }
 
-/* Selection */
+/* ── Selection ──────────────────────────────────────── */
 ::selection {
-  background: rgba(79, 70, 229, 0.25);
+  background: rgba(79,70,229,0.18);
   color: var(--nera-text-primary);
 }
 
-/* Focus visible */
+/* ── Focus ──────────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--nera-accent-primary);
-  outline-offset: 2px;
+  outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* ── Utility: nera-section-pad ──────────────────────── */
+.nera-section { padding: 6rem 0; }
+@media (max-width: 640px) { .nera-section { padding: 4rem 0; } }
+
+/* ── Utility: noise texture overlay ────────────────── */
+.nera-noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ── Engineering grid pattern ───────────────────────── */
+.nera-grid-bg {
+  background-image:
+    linear-gradient(rgba(79,70,229,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,70,229,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.nera-grid-bg-cyan {
+  background-image:
+    linear-gradient(rgba(8,145,178,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8,145,178,0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ── Animated signal line ───────────────────────────── */
+@keyframes signal-travel {
+  0%   { stroke-dashoffset: 200; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+.signal-path {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: signal-travel 2.4s ease-in-out infinite;
+}
+.signal-path-delay-1 { animation-delay: 0.4s; }
+.signal-path-delay-2 { animation-delay: 0.8s; }
+.signal-path-delay-3 { animation-delay: 1.2s; }
+
+/* ── NERA probe float animation ─────────────────────── */
+@keyframes probe-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-8px) rotate(1.5deg); }
+}
+.nera-probe-float {
+  animation: probe-float 4s ease-in-out infinite;
+}
+
+/* ── Pulse ring ──────────────────────────────────────── */
+@keyframes pulse-ring {
+  0%   { transform: scale(0.95); opacity: 0.6; }
+  70%  { transform: scale(1.25); opacity: 0; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+.pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ── Reduce motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
