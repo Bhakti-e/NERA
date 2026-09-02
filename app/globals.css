@@ -65,6 +65,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;   /* prevent horizontal scroll from any element */
 }
 
 /* ── Scrollbar ───────────────────────────────────── */
@@ -222,7 +223,76 @@ body {
 }
 .pulse-ring { animation: pulse-ring 2.2s ease-out infinite; }
 
+/* ── Backward-compatible aliases for old variable names ─────────────
+   Many components still reference --nera-* and --font-* names.
+   These aliases mean we don't need to touch every file.
+─────────────────────────────────────────────────────────────────── */
+:root {
+  /* Old font vars */
+  --font-display: var(--f-display);
+  --font-body:    var(--f-body);
+  --font-mono:    var(--f-mono);
+
+  /* Old surface vars */
+  --nera-surface-page:     var(--s-page);
+  --nera-surface-card:     var(--s-card);
+  --nera-surface-tint:     var(--s-tint);
+  --nera-surface-mid:      var(--s-navy);
+  --nera-surface-mid-alt:  var(--s-navy-alt);
+  --nera-surface-navy:     var(--s-navy);
+  --nera-surface-deep:     var(--s-deep);
+
+  /* Old accent vars */
+  --nera-accent-primary:     var(--c-indigo);
+  --nera-accent-cyan:        var(--c-cyan);
+  --nera-accent-cyan-bright: var(--c-cyan-br);
+  --nera-accent-violet:      var(--c-purple);
+  --nera-accent-green:       var(--c-green);
+  --nera-accent-amber:       var(--c-amber);
+  --nera-accent-rose:        var(--c-rose);
+
+  /* Old text vars */
+  --nera-text-primary:       var(--t-primary);
+  --nera-text-secondary:     var(--t-secondary);
+  --nera-text-muted:         var(--t-muted);
+  --nera-text-on-dark:       var(--t-dark);
+  --nera-text-on-dark-muted: var(--t-dark-muted);
+
+  /* Old shadow vars */
+  --shadow-card:   var(--sh-card);
+  --shadow-lifted: var(--sh-raised);
+  --shadow-indigo: var(--sh-blue);
+
+  /* Old grid classes as variables (handled below in CSS classes) */
+}
+
+/* Old grid class names still used in some files */
+.nera-grid-bg       { background-image: linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px); background-size: 48px 48px; }
+.nera-grid-bg-navy  { background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 48px 48px; }
+.nera-grid-bg-cyan  { background-image: linear-gradient(rgba(8,145,178,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(8,145,178,0.07) 1px, transparent 1px); background-size: 32px 32px; }
+.nera-grid-bg-light { background-image: linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px); background-size: 48px 48px; }
+
+/* Old animation class names */
+.nera-probe-float  { animation: float 4s ease-in-out infinite; }
+.signal-path       { stroke-dasharray: 200; stroke-dashoffset: 200; animation: signal 2.6s ease-in-out infinite; }
+.signal-path-delay-1 { animation-delay: 0.5s; }
+.signal-path-delay-2 { animation-delay: 1.0s; }
+
 /* ── Reduce motion ───────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
+
+/* ── Utility helpers ─────────────────────────────── */
+.page-top { padding-top: 64px; }
+.nera-container {
+  width: 100%;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media (min-width: 640px) {
+  .nera-container { padding-left: 32px; padding-right: 32px; }
 }
