@@ -36,6 +36,14 @@ yarn-error.log*
 # kiro specs / design docs
 .kiro/
 
+# vscode
+.vscode/
+
+# loose images dropped in project root (not in public/)
+/image.png
+/image.jpg
+/image.jpeg
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

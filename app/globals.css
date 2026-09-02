@@ -1,91 +1,154 @@
 @import "tailwindcss";
 
-/* ─────────────────────────────────────────────────────
-   NERA Design Tokens
-   Primary canvas: white / light
-   Accent: blue → purple gradient
-   Immersive (PCB Lab, Robotics, hero tails): dark navy
-───────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   NERA DESIGN SYSTEM — Dark Futuristic Engineering Lab
+   Navbar: always white (logo has white bg)
+   Body: deep navy / near-black
+   Accents: blue, purple, cyan, amber
+═══════════════════════════════════════════════════════ */
 :root {
-  /* Surfaces */
-  --s-page:      #f5f6fa;
-  --s-card:      #ffffff;
-  --s-tint:      #eef0f9;
-  --s-navy:      #0e1628;
-  --s-navy-alt:  #121e35;
-  --s-deep:      #090e1a;
+  /* ── Core surfaces ── */
+  --bg:          #070b14;   /* deepest background */
+  --bg-2:        #0b1120;   /* section surfaces */
+  --bg-3:        #0f1729;   /* elevated panels */
+  --bg-4:        #141f35;   /* cards */
+  --bg-5:        #1a2845;   /* hover state */
+  --bg-glass:    rgba(11,17,32,0.8);
 
-  /* Brand */
-  --c-blue:      #2563eb;
-  --c-blue-dk:   #1d4ed8;
-  --c-purple:    #7c3aed;
-  --c-purple-dk: #6d28d9;
-  --c-indigo:    #4f46e5;
-  --c-cyan:      #0891b2;
-  --c-cyan-br:   #06b6d4;
-  --c-amber:     #d97706;
-  --c-green:     #059669;
-  --c-rose:      #e11d48;
+  /* ── Brand accents ── */
+  --blue:        #2563eb;
+  --blue-lt:     #3b82f6;
+  --purple:      #7c3aed;
+  --purple-lt:   #9d63f5;
+  --cyan:        #06b6d4;
+  --cyan-lt:     #22d3ee;
+  --amber:       #d97706;
+  --green:       #10b981;
+  --rose:        #f43f5e;
 
-  /* Text */
-  --t-primary:     #0d1117;
-  --t-secondary:   #374151;
-  --t-muted:       #6b7280;
-  --t-dark:        #e2e8f0;
-  --t-dark-muted:  #64748b;
+  /* ── Gradient CTAs ── */
+  --cta:         linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --cta-hover:   linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
+  --cta-glow:    0 0 24px rgba(37,99,235,0.35), 0 4px 16px rgba(124,58,237,0.2);
 
-  /* Fonts */
+  /* ── Text ── */
+  --tx:          #e8edf5;   /* primary on dark */
+  --tx-2:        #8a9dc0;   /* secondary */
+  --tx-3:        #4a5e7a;   /* muted */
+  --tx-inv:      #0d1117;   /* on light (navbar) */
+
+  /* ── Borders / glows ── */
+  --border:      rgba(255,255,255,0.07);
+  --border-blue: rgba(37,99,235,0.3);
+  --glow-blue:   0 0 32px rgba(37,99,235,0.2);
+  --glow-cyan:   0 0 32px rgba(6,182,212,0.2);
+  --glow-purple: 0 0 32px rgba(124,58,237,0.2);
+
+  /* ── Fonts ── */
   --f-display: "Space Grotesk", system-ui, sans-serif;
   --f-body:    "Inter", system-ui, sans-serif;
   --f-mono:    "JetBrains Mono", monospace;
 
-  /* Shadows */
-  --sh-card:   0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
-  --sh-raised: 0 4px 16px rgba(0,0,0,0.08), 0 16px 48px rgba(0,0,0,0.06);
-  --sh-blue:   0 4px 24px rgba(37,99,235,0.22);
+  /* ── Radius ── */
+  --r-sm:  8px;
+  --r-md:  12px;
+  --r-lg:  18px;
+  --r-xl:  24px;
 
-  /* CTA gradient */
-  --g-cta:       linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  --g-cta-hover: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
+  /* ── Shadows ── */
+  --sh-card:   0 1px 3px rgba(0,0,0,0.3), 0 8px 32px rgba(0,0,0,0.2);
+  --sh-raised: 0 4px 16px rgba(0,0,0,0.4), 0 16px 48px rgba(0,0,0,0.3);
 
-  /* Radius */
-  --r-sm: 8px;
-  --r-md: 12px;
-  --r-lg: 18px;
-  --r-xl: 24px;
+  /* ══ Backward-compat aliases — old files still work ══ */
+  --font-display: var(--f-display);
+  --font-body:    var(--f-body);
+  --font-mono:    var(--f-mono);
+
+  --s-page:      var(--bg);
+  --s-card:      var(--bg-4);
+  --s-tint:      var(--bg-2);
+  --s-navy:      var(--bg-2);
+  --s-navy-alt:  var(--bg-3);
+  --s-deep:      var(--bg);
+
+  --c-blue:      var(--blue);
+  --c-blue-dk:   #1d4ed8;
+  --c-purple:    var(--purple);
+  --c-purple-dk: #6d28d9;
+  --c-indigo:    #4f46e5;
+  --c-cyan:      var(--cyan);
+  --c-cyan-br:   var(--cyan-lt);
+  --c-amber:     var(--amber);
+  --c-green:     var(--green);
+  --c-rose:      var(--rose);
+
+  --t-primary:     var(--tx);
+  --t-secondary:   var(--tx-2);
+  --t-muted:       var(--tx-3);
+  --t-dark:        var(--tx);
+  --t-dark-muted:  var(--tx-2);
+
+  --nera-surface-page:      var(--bg);
+  --nera-surface-card:      var(--bg-4);
+  --nera-surface-tint:      var(--bg-2);
+  --nera-surface-mid:       var(--bg-2);
+  --nera-surface-mid-alt:   var(--bg-3);
+  --nera-surface-navy:      var(--bg-2);
+  --nera-surface-deep:      var(--bg);
+
+  --nera-accent-primary:    var(--blue);
+  --nera-accent-cyan:       var(--cyan);
+  --nera-accent-cyan-bright:var(--cyan-lt);
+  --nera-accent-violet:     var(--purple);
+  --nera-accent-green:      var(--green);
+  --nera-accent-amber:      var(--amber);
+  --nera-accent-rose:       var(--rose);
+
+  --nera-text-primary:      var(--tx);
+  --nera-text-secondary:    var(--tx-2);
+  --nera-text-muted:        var(--tx-3);
+  --nera-text-on-dark:      var(--tx);
+  --nera-text-on-dark-muted:var(--tx-2);
+  --nera-indigo: #4f46e5;
+  --nera-blue:   var(--blue);
+
+  --shadow-card:   var(--sh-card);
+  --shadow-lifted: var(--sh-raised);
+  --shadow-indigo: var(--cta-glow);
+  --sh-blue:       var(--cta-glow);
+
+  --g-cta:       var(--cta);
+  --g-cta-hover: var(--cta-hover);
 }
 
-/* ── Base reset ──────────────────────────────────── */
+/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; padding: 0; margin: 0; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--s-page);
-  color: var(--t-primary);
+  background: var(--bg);
+  color: var(--tx);
   font-family: var(--f-body);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;   /* prevent horizontal scroll from any element */
+  overflow-x: hidden;
 }
 
-/* ── Scrollbar ───────────────────────────────────── */
-::-webkit-scrollbar       { width: 5px; }
-::-webkit-scrollbar-track { background: var(--s-deep); }
-::-webkit-scrollbar-thumb { background: rgba(79,70,229,0.5); border-radius: 3px; }
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(37,99,235,0.4); border-radius: 2px; }
 
-/* ── Selection ───────────────────────────────────── */
-::selection { background: rgba(79,70,229,0.14); }
+/* ── Selection ── */
+::selection { background: rgba(37,99,235,0.3); color: #fff; }
 
-/* ── Focus ───────────────────────────────────────── */
-:focus-visible { outline: 2px solid var(--c-blue); outline-offset: 3px; border-radius: 4px; }
+/* ── Focus ── */
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
 
-/* ════════════════════════════════════════════════════
-   BUTTON SYSTEM
-   Always clear, always big enough to click, always
-   communicates its purpose without ambiguity.
-════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   BUTTON SYSTEM — always visible, always clickable
+══════════════════════════════════════════════════════ */
 
-/* Primary — blue→purple gradient */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -96,25 +159,34 @@ body {
   font-family: var(--f-body);
   font-size: 0.9rem;
   font-weight: 600;
-  color: #ffffff;
-  background: var(--g-cta);
+  color: #fff;
+  background: var(--cta);
   border: none;
   border-radius: var(--r-md);
-  box-shadow: var(--sh-blue);
+  box-shadow: var(--cta-glow);
   cursor: pointer;
   text-decoration: none;
   transition: all 0.18s ease;
   white-space: nowrap;
   user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background 0.15s;
 }
 .btn-primary:hover {
-  background: var(--g-cta-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 32px rgba(37,99,235,0.3);
+  background: var(--cta-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(37,99,235,0.45), 0 8px 32px rgba(124,58,237,0.3);
 }
+.btn-primary:hover::after { background: rgba(255,255,255,0.06); }
 .btn-primary:active { transform: translateY(0); }
 
-/* Secondary — white bg, visible border */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -125,174 +197,152 @@ body {
   font-family: var(--f-body);
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--t-primary);
-  background: #ffffff;
-  border: 1.5px solid rgba(79,70,229,0.3);
+  color: var(--tx);
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(255,255,255,0.15);
   border-radius: var(--r-md);
   cursor: pointer;
   text-decoration: none;
   transition: all 0.18s ease;
   white-space: nowrap;
-  user-select: none;
 }
 .btn-secondary:hover {
-  border-color: var(--c-blue);
-  color: var(--c-blue);
-  background: rgba(37,99,235,0.04);
+  background: rgba(37,99,235,0.12);
+  border-color: var(--blue);
+  color: #fff;
   transform: translateY(-1px);
 }
 
-/* Ghost — for dark backgrounds */
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 46px;
-  padding: 0 28px;
-  font-family: var(--f-body);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--t-dark);
-  background: rgba(255,255,255,0.07);
-  border: 1.5px solid rgba(255,255,255,0.18);
-  border-radius: var(--r-md);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.18s ease;
-  white-space: nowrap;
-}
-.btn-ghost:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.32);
-  transform: translateY(-1px);
-}
+/* Ghost alias */
+.btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px; padding: 0 28px; font-family: var(--f-body); font-size: 0.9rem;
+  font-weight: 600; color: var(--tx); background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.12); border-radius: var(--r-md);
+  cursor: pointer; text-decoration: none; transition: all 0.18s ease; white-space: nowrap; }
+.btn-ghost:hover { background: rgba(37,99,235,0.1); border-color: var(--blue-lt); color: #fff; transform: translateY(-1px); }
 
-/* Small variants */
-.btn-primary-sm {
-  min-height: 36px;
-  padding: 0 18px;
-  font-size: 0.8rem;
-}
-.btn-secondary-sm {
-  min-height: 36px;
-  padding: 0 18px;
-  font-size: 0.8rem;
-}
+/* Small modifiers */
+.btn-primary-sm   { min-height: 36px; padding: 0 18px; font-size: 0.8rem; }
+.btn-secondary-sm { min-height: 36px; padding: 0 18px; font-size: 0.8rem; }
 
-/* ── Grid/circuit backgrounds ────────────────────── */
-.bg-grid-light {
+/* ══════════════════════════════════════════════════════
+   GRID / CIRCUIT BACKGROUNDS
+══════════════════════════════════════════════════════ */
+.bg-grid {
   background-image:
-    linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(37,99,235,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.08) 1px, transparent 1px);
   background-size: 48px 48px;
 }
-.bg-grid-navy {
+.bg-grid-sm {
   background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(rgba(37,99,235,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 .bg-grid-cyan {
   background-image:
-    linear-gradient(rgba(8,145,178,0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8,145,178,0.07) 1px, transparent 1px);
+    linear-gradient(rgba(6,182,212,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6,182,212,0.08) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
-/* ── Signal animation ────────────────────────────── */
+/* Old class aliases */
+.nera-grid-bg       { background-image: linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px); background-size: 48px 48px; }
+.nera-grid-bg-navy  { background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 48px 48px; }
+.nera-grid-bg-cyan  { background-image: linear-gradient(rgba(6,182,212,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.07) 1px, transparent 1px); background-size: 32px 32px; }
+.nera-grid-bg-light { background-image: linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px); background-size: 48px 48px; }
+.bg-grid-light      { background-image: linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px); background-size: 48px 48px; }
+.bg-grid-navy       { background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 48px 48px; }
+
+/* ══════════════════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════════════════ */
 @keyframes signal {
   0%   { stroke-dashoffset: 300; opacity: 0; }
-  8%   { opacity: 0.7; }
-  92%  { opacity: 0.7; }
+  8%   { opacity: 0.85; }
+  92%  { opacity: 0.85; }
   100% { stroke-dashoffset: 0; opacity: 0; }
 }
-.sig { stroke-dasharray: 300; stroke-dashoffset: 300; animation: signal 2.6s ease-in-out infinite; }
-.sig-d1 { animation-delay: 0.5s; }
-.sig-d2 { animation-delay: 1.0s; }
+.sig { stroke-dasharray: 300; stroke-dashoffset: 300; animation: signal 2.8s ease-in-out infinite; }
+.sig-d1 { animation-delay: 0.6s; }
+.sig-d2 { animation-delay: 1.2s; }
+.sig-d3 { animation-delay: 1.8s; }
+.signal-path          { stroke-dasharray: 200; stroke-dashoffset: 200; animation: signal 2.6s ease-in-out infinite; }
+.signal-path-delay-1  { animation-delay: 0.5s; }
+.signal-path-delay-2  { animation-delay: 1.0s; }
 
-/* ── Float ───────────────────────────────────────── */
-@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-.float { animation: float 4s ease-in-out infinite; }
+@keyframes float-y { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.float { animation: float-y 5s ease-in-out infinite; }
+.nera-probe-float { animation: float-y 4s ease-in-out infinite; }
 
-/* ── Pulse ───────────────────────────────────────── */
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.spin-slow { animation: spin-slow 20s linear infinite; }
+
 @keyframes pulse-ring {
-  0%   { transform: scale(1); opacity: 0.5; }
-  70%  { transform: scale(1.3); opacity: 0; }
-  100% { transform: scale(1.3); opacity: 0; }
+  0%   { transform: scale(1);    opacity: 0.5; }
+  70%  { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
 }
-.pulse-ring { animation: pulse-ring 2.2s ease-out infinite; }
+.pulse-ring { animation: pulse-ring 2.4s ease-out infinite; }
 
-/* ── Backward-compatible aliases for old variable names ─────────────
-   Many components still reference --nera-* and --font-* names.
-   These aliases mean we don't need to touch every file.
-─────────────────────────────────────────────────────────────────── */
-:root {
-  /* Old font vars */
-  --font-display: var(--f-display);
-  --font-body:    var(--f-body);
-  --font-mono:    var(--f-mono);
+@keyframes glow-breathe {
+  0%,100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+.glow-breathe { animation: glow-breathe 2.5s ease-in-out infinite; }
 
-  /* Old surface vars */
-  --nera-surface-page:     var(--s-page);
-  --nera-surface-card:     var(--s-card);
-  --nera-surface-tint:     var(--s-tint);
-  --nera-surface-mid:      var(--s-navy);
-  --nera-surface-mid-alt:  var(--s-navy-alt);
-  --nera-surface-navy:     var(--s-navy);
-  --nera-surface-deep:     var(--s-deep);
-
-  /* Old accent vars */
-  --nera-accent-primary:     var(--c-indigo);
-  --nera-accent-cyan:        var(--c-cyan);
-  --nera-accent-cyan-bright: var(--c-cyan-br);
-  --nera-accent-violet:      var(--c-purple);
-  --nera-accent-green:       var(--c-green);
-  --nera-accent-amber:       var(--c-amber);
-  --nera-accent-rose:        var(--c-rose);
-
-  /* Old text vars */
-  --nera-text-primary:       var(--t-primary);
-  --nera-text-secondary:     var(--t-secondary);
-  --nera-text-muted:         var(--t-muted);
-  --nera-text-on-dark:       var(--t-dark);
-  --nera-text-on-dark-muted: var(--t-dark-muted);
-
-  /* Old shadow vars */
-  --shadow-card:   var(--sh-card);
-  --shadow-lifted: var(--sh-raised);
-  --shadow-indigo: var(--sh-blue);
-
-  /* Old grid classes as variables (handled below in CSS classes) */
+@keyframes scan-line {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  20%  { opacity: 0.6; }
+  80%  { opacity: 0.6; }
+  100% { transform: translateY(100vh); opacity: 0; }
 }
 
-/* Old grid class names still used in some files */
-.nera-grid-bg       { background-image: linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px); background-size: 48px 48px; }
-.nera-grid-bg-navy  { background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 48px 48px; }
-.nera-grid-bg-cyan  { background-image: linear-gradient(rgba(8,145,178,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(8,145,178,0.07) 1px, transparent 1px); background-size: 32px 32px; }
-.nera-grid-bg-light { background-image: linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px); background-size: 48px 48px; }
-
-/* Old animation class names */
-.nera-probe-float  { animation: float 4s ease-in-out infinite; }
-.signal-path       { stroke-dasharray: 200; stroke-dashoffset: 200; animation: signal 2.6s ease-in-out infinite; }
-.signal-path-delay-1 { animation-delay: 0.5s; }
-.signal-path-delay-2 { animation-delay: 1.0s; }
-
-/* ── Reduce motion ───────────────────────────────── */
+/* ── Reduce motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
 }
 
-/* ── Utility helpers ─────────────────────────────── */
-.page-top { padding-top: 64px; }
-.nera-container {
-  width: 100%;
-  max-width: 1320px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+/* ══════════════════════════════════════════════════════
+   UTILITY HELPERS
+══════════════════════════════════════════════════════ */
+.page-top    { padding-top: 64px; }
+.nera-wrap   { width: 100%; max-width: 1320px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
+@media (min-width: 640px) { .nera-wrap { padding-left: 32px; padding-right: 32px; } }
+.nera-container { width: 100%; max-width: 1320px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
+@media (min-width: 640px) { .nera-container { padding-left: 32px; padding-right: 32px; } }
+
+/* Card base for dark premium style */
+.nera-card {
+  background: var(--bg-4);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-card);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
-@media (min-width: 640px) {
-  .nera-container { padding-left: 32px; padding-right: 32px; }
+.nera-card:hover {
+  border-color: rgba(37,99,235,0.3);
+  box-shadow: var(--sh-raised), 0 0 32px rgba(37,99,235,0.08);
+  transform: translateY(-2px);
+}
+
+/* Gradient text helper */
+.text-gradient {
+  background: linear-gradient(135deg, var(--blue-lt), var(--purple-lt));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-cyan {
+  background: linear-gradient(135deg, var(--cyan-lt), var(--blue-lt));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section separator lines */
+.sep-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37,99,235,0.4), rgba(124,58,237,0.3), transparent);
 }
