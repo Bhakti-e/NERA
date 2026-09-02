@@ -208,8 +208,8 @@ function SimulatorCard({ sim, index }: { sim: Simulator; index: number }) {
 
 export default function SimulatorsSection({ simulators }: { simulators: Simulator[] }) {
   return (
-    <section id="simulators" className="py-28 relative overflow-hidden" style={{ background: "var(--nera-surface-page)" }}>
-      <div className="absolute inset-0 nera-grid-bg pointer-events-none opacity-40" />
+    <section id="simulators" className="py-28 relative overflow-hidden" style={{ background: "var(--nera-surface-tint)" }}>
+      <div className="absolute inset-0 nera-grid-bg-light pointer-events-none opacity-70" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         {/* Header */}
@@ -223,7 +223,7 @@ export default function SimulatorsSection({ simulators }: { simulators: Simulato
           <div>
             <p
               className="text-xs font-semibold uppercase tracking-widest mb-3"
-              style={{ color: "var(--nera-accent-violet)", fontFamily: "var(--font-mono)" }}
+              style={{ color: "var(--nera-purple)", fontFamily: "var(--font-mono)" }}
             >
               NERA Software
             </p>

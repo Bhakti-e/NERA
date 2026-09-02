@@ -74,10 +74,10 @@ export default function ExploreSection() {
     <section
       id="explore"
       className="py-28 relative overflow-hidden"
-      style={{ background: "var(--nera-surface-page)" }}
+      style={{ background: "#ffffff" }}
     >
       {/* Subtle grid */}
-      <div className="absolute inset-0 nera-grid-bg opacity-60 pointer-events-none" />
+      <div className="absolute inset-0 nera-grid-bg-light opacity-80 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         {/* Header */}
@@ -90,7 +90,7 @@ export default function ExploreSection() {
         >
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-3"
-            style={{ color: "var(--nera-accent-primary)", fontFamily: "var(--font-mono)" }}
+            style={{ color: "var(--nera-blue)", fontFamily: "var(--font-mono)" }}
           >
             Technology Domains
           </p>

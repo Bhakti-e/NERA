@@ -19,13 +19,13 @@ export default function ServicesSection() {
   return (
     <section
       className="py-28 relative overflow-hidden"
-      style={{ background: "white" }}
+      style={{ background: "#ffffff" }}
     >
       {/* Subtle gradient */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 70% 60% at 80% 50%, rgba(79,70,229,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 60% 50% at 80% 50%, rgba(79,70,229,0.04) 0%, transparent 70%)",
         }}
       />
 
@@ -62,16 +62,9 @@ export default function ServicesSection() {
               From a custom simulator to a robotics prototype — NERA takes your idea from conversation to working reality.
               No intermediaries, no bloated process.
             </p>
-            <Link
-              href="/services"
-              className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-200 hover:scale-105"
-              style={{
-                background: "var(--nera-accent-primary)",
-                boxShadow: "var(--shadow-indigo)",
-              }}
-            >
+            <Link href="/services" className="nera-btn-primary text-base px-8 py-3.5">
               Start a Project with NERA
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
 

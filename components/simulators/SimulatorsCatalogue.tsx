@@ -19,14 +19,14 @@ const categoryColor: Record<string, string> = {
 
 export default function SimulatorsCatalogue() {
   return (
-    <div className="min-h-screen" style={{ background: "var(--nera-surface-page)" }}>
+    <div className="min-h-screen" style={{ background: "var(--nera-surface-tint)" }}>
 
       {/* Hero */}
       <div
         className="relative pt-28 pb-16 px-5 sm:px-8 overflow-hidden"
-        style={{ background: "var(--nera-surface-mid)" }}
+        style={{ background: "var(--nera-surface-navy)" }}
       >
-        <div className="absolute inset-0 nera-grid-bg opacity-25 pointer-events-none" />
+        <div className="absolute inset-0 nera-grid-bg-navy pointer-events-none" />
         <div className="absolute bottom-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(90deg,transparent,rgba(124,58,237,0.4),transparent)" }} />
         <div className="relative z-10 max-w-4xl mx-auto text-center">

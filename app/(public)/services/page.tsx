@@ -17,12 +17,12 @@ export default function ServicesPage() {
   const [selected, setSelected] = useState<ServiceType | null>(null);
 
   return (
-    <div className="min-h-screen" style={{ background: "var(--nera-surface-page)" }}>
+    <div className="min-h-screen" style={{ background: "var(--nera-surface-tint)" }}>
 
       {/* ── Page hero ─────────────────────────────────── */}
       <div
         className="relative pt-28 pb-20 px-5 sm:px-8 overflow-hidden"
-        style={{ background: "var(--nera-surface-mid)" }}
+        style={{ background: "var(--nera-surface-navy)" }}
       >
         {/* Grid */}
         <div className="absolute inset-0 nera-grid-bg opacity-25 pointer-events-none" />

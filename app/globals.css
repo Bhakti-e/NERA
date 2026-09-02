@@ -1,29 +1,45 @@
 @import "tailwindcss";
 
 :root {
-  /* ── Surfaces ──────────────────────────────────────── */
-  --nera-surface-page:    #f4f3f0;
-  --nera-surface-card:    #ffffff;
-  --nera-surface-raised:  #eeecea;
-  --nera-surface-mid:     #16161f;
-  --nera-surface-mid-alt: #1c1c28;
-  --nera-surface-deep:    #0c0c13;
+  /* ── Surfaces: 60-70% white/light, 20-30% blue-purple, small dark ── */
+  --nera-surface-page:      #f8f8fc;   /* Primary — very light blue-white */
+  --nera-surface-card:      #ffffff;
+  --nera-surface-raised:    #f0f0f8;
+  --nera-surface-tint:      #eef0fb;   /* Light blue-purple tint — transition sections */
+  --nera-surface-tint-alt:  #e8eaf8;   /* Slightly deeper tint */
+  --nera-surface-navy:      #0f1729;   /* Dark navy — immersive sections only */
+  --nera-surface-navy-alt:  #131d35;
+  --nera-surface-deep:      #0a0f1e;   /* Deepest — footer */
 
-  /* ── Brand accents ─────────────────────────────────── */
-  --nera-accent-primary:  #4f46e5;   /* indigo  — primary CTA, software */
-  --nera-accent-cyan:     #0891b2;   /* teal    — PCB / electronics */
-  --nera-accent-cyan-bright: #06b6d4;
-  --nera-accent-violet:   #7c3aed;   /* violet  — simulators */
-  --nera-accent-green:    #059669;   /* green   — research / active */
-  --nera-accent-amber:    #d97706;   /* amber   — robotics */
-  --nera-accent-rose:     #e11d48;   /* rose    — alerts */
+  /* ── Brand colours ─────────────────────────────────── */
+  --nera-blue:        #2563eb;   /* Primary blue */
+  --nera-blue-deep:   #1d4ed8;
+  --nera-purple:      #7c3aed;   /* Secondary purple */
+  --nera-purple-mid:  #6d28d9;
+  --nera-indigo:      #4f46e5;   /* Indigo bridge between blue & purple */
+  --nera-cyan:        #0891b2;   /* Accent cyan — PCB / electronics */
+  --nera-cyan-bright: #06b6d4;
+  --nera-teal:        #0d9488;
+
+  /* ── CTA gradient ──────────────────────────────────── */
+  --nera-cta-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --nera-cta-gradient-hover: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
+
+  /* ── Legacy accent aliases (keep for compat) ─────── */
+  --nera-accent-primary:    #4f46e5;
+  --nera-accent-cyan:       #0891b2;
+  --nera-accent-cyan-bright:#06b6d4;
+  --nera-accent-violet:     #7c3aed;
+  --nera-accent-green:      #059669;
+  --nera-accent-amber:      #d97706;
+  --nera-accent-rose:       #e11d48;
 
   /* ── Text ──────────────────────────────────────────── */
-  --nera-text-primary:        #0f0f14;
-  --nera-text-secondary:      #4a4a5a;
-  --nera-text-muted:          #8888a0;
-  --nera-text-on-dark:        #ededf5;
-  --nera-text-on-dark-muted:  #7a7a90;
+  --nera-text-primary:        #0d1117;   /* Dark navy — almost black */
+  --nera-text-secondary:      #374151;
+  --nera-text-muted:          #6b7280;
+  --nera-text-on-dark:        #e8eaf0;
+  --nera-text-on-dark-muted:  #6b7a99;
 
   /* ── Fonts ─────────────────────────────────────────── */
   --font-display: "Space Grotesk", system-ui, sans-serif;
@@ -31,9 +47,11 @@
   --font-mono:    "JetBrains Mono", "Fira Code", monospace;
 
   /* ── Shadows ───────────────────────────────────────── */
-  --shadow-card:    0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
-  --shadow-lifted:  0 4px 12px rgba(0,0,0,0.08), 0 16px 40px rgba(0,0,0,0.06);
+  --shadow-card:    0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-lifted:  0 4px 16px rgba(0,0,0,0.08), 0 16px 48px rgba(0,0,0,0.06);
+  --shadow-blue:    0 8px 32px rgba(37,99,235,0.2);
   --shadow-indigo:  0 8px 32px rgba(79,70,229,0.2);
+  --shadow-navy:    0 4px 24px rgba(13,23,48,0.15);
 
   /* ── Radii ─────────────────────────────────────────── */
   --radius-sm:  6px;
@@ -71,50 +89,82 @@ body {
 
 /* ── Selection ──────────────────────────────────────── */
 ::selection {
-  background: rgba(79,70,229,0.18);
+  background: rgba(79,70,229,0.15);
   color: var(--nera-text-primary);
 }
 
 /* ── Focus ──────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--nera-accent-primary);
+  outline: 2px solid var(--nera-blue);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-/* ── Utility: nera-section-pad ──────────────────────── */
-.nera-section { padding: 6rem 0; }
-@media (max-width: 640px) { .nera-section { padding: 4rem 0; } }
-
-/* ── Utility: noise texture overlay ────────────────── */
-.nera-noise::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
+/* ── CTA button gradient ────────────────────────────── */
+.nera-btn-primary {
+  background: var(--nera-cta-gradient);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.625rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.nera-btn-primary:hover {
+  background: var(--nera-cta-gradient-hover);
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(37,99,235,0.3);
 }
 
-/* ── Engineering grid pattern ───────────────────────── */
+/* ── Engineering grid patterns ──────────────────────── */
 .nera-grid-bg {
   background-image:
-    linear-gradient(rgba(79,70,229,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79,70,229,0.06) 1px, transparent 1px);
+    linear-gradient(rgba(79,70,229,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,70,229,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.nera-grid-bg-light {
+  background-image:
+    linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.nera-grid-bg-cyan {
+  background-image:
+    linear-gradient(rgba(8,145,178,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8,145,178,0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.nera-grid-bg-navy {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
-.nera-grid-bg-cyan {
-  background-image:
-    linear-gradient(rgba(8,145,178,0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8,145,178,0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
+/* ── Gradient section dividers ──────────────────────── */
+.nera-divider-to-tint {
+  background: linear-gradient(180deg, #ffffff 0%, var(--nera-surface-tint) 100%);
+}
+.nera-divider-to-white {
+  background: linear-gradient(180deg, var(--nera-surface-tint) 0%, #ffffff 100%);
+}
+.nera-divider-to-navy {
+  background: linear-gradient(180deg, var(--nera-surface-tint) 0%, var(--nera-surface-navy) 100%);
 }
 
-/* ── Animated signal line ───────────────────────────── */
+/* ── Animated signal lines ──────────────────────────── */
 @keyframes signal-travel {
   0%   { stroke-dashoffset: 200; opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.8; }
   100% { stroke-dashoffset: 0; opacity: 0; }
 }
 .signal-path {
@@ -122,28 +172,31 @@ body {
   stroke-dashoffset: 200;
   animation: signal-travel 2.4s ease-in-out infinite;
 }
-.signal-path-delay-1 { animation-delay: 0.4s; }
-.signal-path-delay-2 { animation-delay: 0.8s; }
-.signal-path-delay-3 { animation-delay: 1.2s; }
+.signal-path-delay-1 { animation-delay: 0.5s; }
+.signal-path-delay-2 { animation-delay: 1.0s; }
+.signal-path-delay-3 { animation-delay: 1.5s; }
 
-/* ── NERA probe float animation ─────────────────────── */
+/* ── Float animation ────────────────────────────────── */
 @keyframes probe-float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50%       { transform: translateY(-8px) rotate(1.5deg); }
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-7px); }
 }
-.nera-probe-float {
-  animation: probe-float 4s ease-in-out infinite;
-}
+.nera-probe-float { animation: probe-float 4s ease-in-out infinite; }
 
 /* ── Pulse ring ──────────────────────────────────────── */
 @keyframes pulse-ring {
-  0%   { transform: scale(0.95); opacity: 0.6; }
+  0%   { transform: scale(0.95); opacity: 0.5; }
   70%  { transform: scale(1.25); opacity: 0; }
   100% { transform: scale(1.25); opacity: 0; }
 }
-.pulse-ring {
-  animation: pulse-ring 2s ease-out infinite;
+.pulse-ring { animation: pulse-ring 2.2s ease-out infinite; }
+
+/* ── Glow pulse ─────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
 }
+.glow-pulse { animation: glow-pulse 2.5s ease-in-out infinite; }
 
 /* ── Reduce motion ──────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

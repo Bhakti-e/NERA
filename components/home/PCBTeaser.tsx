@@ -179,10 +179,10 @@ export default function PCBTeaser() {
   return (
     <section
       className="relative py-28 overflow-hidden"
-      style={{ background: "var(--nera-surface-deep)" }}
+      style={{ background: "var(--nera-surface-navy)" }}
     >
       {/* Grid overlay */}
-      <div className="absolute inset-0 nera-grid-bg-cyan opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 nera-grid-bg-cyan opacity-40 pointer-events-none" />
 
       {/* Top/bottom separator lines */}
       <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(8,145,178,0.4) 50%, transparent 100%)" }} />

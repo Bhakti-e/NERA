@@ -5,9 +5,9 @@ export default function NotFound() {
   return (
     <div
       className="min-h-screen flex items-center justify-center px-5 relative overflow-hidden"
-      style={{ background: "var(--nera-surface-mid)" }}
+      style={{ background: "var(--nera-surface-navy)" }}
     >
-      <div className="absolute inset-0 nera-grid-bg opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 nera-grid-bg-navy opacity-60 pointer-events-none" />
 
       <div className="relative z-10 text-center max-w-md">
         {/* Big number */}

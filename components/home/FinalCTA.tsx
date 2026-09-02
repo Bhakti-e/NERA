@@ -8,10 +8,10 @@ export default function FinalCTA() {
   return (
     <section
       className="relative py-32 overflow-hidden"
-      style={{ background: "var(--nera-surface-mid)" }}
+      style={{ background: "var(--nera-surface-navy)" }}
     >
       {/* Engineering background */}
-      <div className="absolute inset-0 nera-grid-bg opacity-25 pointer-events-none" />
+      <div className="absolute inset-0 nera-grid-bg-navy pointer-events-none" />
 
       {/* Indigo radial glow */}
       <div
@@ -103,17 +103,9 @@ export default function FinalCTA() {
           transition={{ delay: 0.26 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3"
         >
-          {/* Primary — same href */}
-          <Link
-            href="/#explore"
-            className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-200 hover:scale-105"
-            style={{
-              background: "var(--nera-accent-primary)",
-              boxShadow: "0 4px 24px rgba(79,70,229,0.3)",
-            }}
-          >
+          <Link href="/#explore" className="nera-btn-primary">
             Explore NERA
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4" />
           </Link>
 
           {/* Secondary — same href */}

@@ -297,11 +297,7 @@ export default function ServiceForm({ serviceType, onBack }: Props) {
         {/* Submit — same WhatsApp logic, new label */}
         <button
           type="submit"
-          className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-semibold text-sm text-white transition-all duration-200 hover:scale-[1.02] hover:shadow-lg mt-2"
-          style={{
-            background: "var(--nera-accent-primary)",
-            boxShadow: "var(--shadow-indigo)",
-          }}
+          className="nera-btn-primary w-full justify-center py-3.5 mt-2"
         >
           <Send className="w-4 h-4" />
           {btnLabel}

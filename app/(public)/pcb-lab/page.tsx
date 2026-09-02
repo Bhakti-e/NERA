@@ -21,7 +21,7 @@ export default function PCBLabPage() {
   return (
     <div
       className="min-h-screen relative"
-      style={{ background: "var(--nera-surface-deep)" }}
+      style={{ background: "var(--nera-surface-navy)" }}
     >
       {/* Background grid */}
       <div className="fixed inset-0 nera-grid-bg-cyan opacity-40 pointer-events-none" aria-hidden="true" />

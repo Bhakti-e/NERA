@@ -24,17 +24,10 @@ export default function RoboticsSection({ projects }: { projects: RoboticsProjec
     <section
       id="robotics"
       className="py-28 relative overflow-hidden"
-      style={{ background: "var(--nera-surface-mid)" }}
+      style={{ background: "var(--nera-surface-navy)" }}
     >
-      {/* Radial amber accent */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse 60% 50% at 15% 50%, rgba(217,119,6,0.07) 0%, transparent 70%)",
-        }}
-      />
-      {/* Fine grid */}
-      <div className="absolute inset-0 nera-grid-bg opacity-20 pointer-events-none" />
+      {/* Grid */}
+      <div className="absolute inset-0 nera-grid-bg-navy pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
