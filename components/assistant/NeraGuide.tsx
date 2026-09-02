@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX, X } from "lucide-react";
 import { simulators } from "@/data/simulators";
 
+// Persistent NERA voice guide. A harmless source update here also lets connected deploy platforms detect a fresh main-branch commit.
 const routeCopy: Record<string, { title: string; text: string }> = {
   "/": {
     title: "NERA Guide online",
